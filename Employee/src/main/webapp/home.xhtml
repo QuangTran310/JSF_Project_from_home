@@ -17,7 +17,7 @@
 	<div class="container">
 		<h:panelGroup id="super">
 			<!-- start of list employees section -->
-			<h:form rendered="#{employeeUIBean.formCode eq 'le'}">
+			<h:form rendered="#{employeeUIBean.formCode eq 'le'}" id="leform">
 				<h2 class="listE-hd text-light bg-dark text-center">List
 					Employees</h2>
 				<h:panelGroup rendered="#{empty employeeUIBean.listEmployees}">
@@ -87,7 +87,7 @@
 			<!-- start of employee details section -->
 			<div class="ed-section">
 				<h:form class="ed-form bg-dark text-light"
-					rendered="#{employeeUIBean.formCode eq 'ed'}">
+					rendered="#{employeeUIBean.formCode eq 'ed'}" id="updateform">
 					<h2 class="ed-hd text-light bg-dark text-center">Employee
 						Details</h2>
 					<div class="form-group">
@@ -112,12 +112,14 @@
 						</h:panelGroup>
 					</div>
 					<div class="form-group">
+						<h:panelGroup id="panelDOB">
 
-						<!-- start of composite component section -->
-						<cc:inputDate value="#{employeeUIBean.employee.dateOfBirth}"
-							inputPattern="ddMMyyyy" outputPattern="dd-MM-yyyy" />
-						<!-- end of composite component section -->
+							<!-- start of composite component section -->
+							<cc:inputDate value="#{employeeUIBean.employee.dateOfBirth}"
+								inputPattern="ddMMyyyy" outputPattern="dd-MM-yyyy" />
+							<!-- end of composite component section -->
 
+						</h:panelGroup>
 					</div>
 					<div class="form-group">
 						<h:panelGroup id="updateEmail">
@@ -182,7 +184,7 @@
 								<p:resetInput target="updateEmail" />
 								<p:resetInput target="updatePN" />
 								<p:resetInput target="updateName" />
-								<p:resetInput target="j_idt44:j_idt53:updateDOB" />
+								<p:resetInput target="panelDOB" />
 								<p:resetInput target="updateJD" />
 								<p:ajax event="click"
 									listener="#{employeeUIBean.setFormCode('le')}" update="super"></p:ajax>
@@ -197,7 +199,7 @@
 			<!-- start of add employee section -->
 			<div class="ed-section">
 				<h:form class="ae-form bg-dark text-light"
-					rendered="#{employeeUIBean.formCode eq 'ae'}">
+					rendered="#{employeeUIBean.formCode eq 'ae'}" id="addform">
 					<h2 class="ed-hd text-light bg-dark text-center">Add Employee</h2>
 					<div class="form-group">
 						<h:panelGroup id="addName">
@@ -218,9 +220,9 @@
 							<h:inputText class="form-control form-control-sm"
 								value="#{employeeUIBean.employee.dateOfBirth}"
 								a:placeholder="Enter date of birth."
-								converterMessage="Format required: year-month-day."
+								converterMessage="Format required: daymonthyear."
 								id="addDOBInput">
-								<f:convertDateTime pattern="yyyy-MM-dd" />
+								<f:convertDateTime pattern="ddMMyyyy" />
 								<f:validator validatorId="emptyDOBValidation" />
 								<f:validator validatorId="dobPatternValidation" />
 								<p:ajax event="blur" update="addDOB" />
@@ -265,9 +267,9 @@
 							<h:inputText class="form-control form-control-sm"
 								value="#{employeeUIBean.employee.joinDate}"
 								a:placeholder="Enter join date."
-								converterMessage="Format required: year-month-day."
+								converterMessage="Format required: daymonthyear."
 								id="addJDInput">
-								<f:convertDateTime pattern="yyyy-MM-dd" />
+								<f:convertDateTime pattern="ddMMyyyy" />
 								<f:validator validatorId="emptyJDValidation" />
 								<f:validator validatorId="jdPatternValidation" />
 								<p:ajax event="blur" update="addJD" />

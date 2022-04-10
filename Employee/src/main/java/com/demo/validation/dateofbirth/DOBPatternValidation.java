@@ -22,11 +22,9 @@ public class DOBPatternValidation implements Validator {
 	@Override
 	public void validate(FacesContext conetxt, UIComponent component, Object value) throws ValidatorException {
 		// TODO Auto-generated method stub
-		Map<String, Object> attributes = component.getAttributes();
-		String formatString = (String) attributes.get("inputPattern");
 		Date dob = (Date) value;
 		if (dob != null) {
-			DateFormat originalFormat = new SimpleDateFormat(formatString);
+			DateFormat originalFormat = new SimpleDateFormat("ddMMyyyy");
 			String formattedDate = originalFormat.format(dob);
 			if (!Pattern.matches(regex, formattedDate)) {
 				FacesMessage fm = new FacesMessage("Format required: ddMMyyyy.");

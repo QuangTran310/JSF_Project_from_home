@@ -42,18 +42,6 @@ public class EmployeeDAO implements Serializable {
 		return c;
 	}
 
-	public void closeStatementsAndConnection() {
-		try {
-			stm.close();
-			pstm.close();
-			rs.close();
-			c.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	// get all employees
 	public List<Employee> getListEmployees() {
 		List<Employee> listEmployees = new ArrayList<Employee>();
@@ -71,6 +59,9 @@ public class EmployeeDAO implements Serializable {
 				employee.setJoinDate(rs.getDate(6));
 				listEmployees.add(employee);
 			}
+			stm.close();
+			rs.close();
+			c.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,11 +76,11 @@ public class EmployeeDAO implements Serializable {
 			pstm = getConnection().prepareStatement(query);
 			pstm.setInt(1, id);
 			pstm.executeUpdate();
+			pstm.close();
+			c.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			closeStatementsAndConnection();
 		}
 	}
 
@@ -105,12 +96,12 @@ public class EmployeeDAO implements Serializable {
 			pstm.setDate(5, new java.sql.Date(employee.getJoinDate().getTime()));
 			pstm.setInt(6, employee.getId());
 			pstm.executeUpdate();
+			pstm.close();
+			c.close();
 			System.out.println("Update successfully!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			closeStatementsAndConnection();
 		}
 	}
 
@@ -125,12 +116,12 @@ public class EmployeeDAO implements Serializable {
 			pstm.setString(4, employee.getPhoneNumber());
 			pstm.setDate(5, new java.sql.Date(employee.getJoinDate().getTime()));
 			pstm.executeUpdate();
+			pstm.close();
+			c.close();
 			System.out.println("Insert new employee successfully!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			closeStatementsAndConnection();
 		}
 	}
 
@@ -145,6 +136,9 @@ public class EmployeeDAO implements Serializable {
 				isEmailExists = rs.getBoolean("case");
 				return isEmailExists;
 			}
+			pstm.close();
+			rs.close();
+			c.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -163,6 +157,9 @@ public class EmployeeDAO implements Serializable {
 				isPhoneNumberExists = rs.getBoolean("case");
 				return isPhoneNumberExists;
 			}
+			pstm.close();
+			rs.close();
+			c.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

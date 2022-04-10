@@ -27,11 +27,16 @@ public class InputDateConverter implements Converter {
 		// System.out.println("input:" + formatString);
 		SimpleDateFormat sdf = new SimpleDateFormat(formatString);
 		Date dateVal1 = null;
+		if (value != null && value.contains("-")) {
+			FacesMessage fm = new FacesMessage("format required: daymonthyear.");
+			fm.setSeverity(FacesMessage.SEVERITY_ERROR);
+			throw new ConverterException(fm);
+		}
 		try {
 			dateVal1 = sdf.parse(value);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			FacesMessage fm = new FacesMessage("Unparsable value '" + value + "' to date.");
+			FacesMessage fm = new FacesMessage("format required: daymonthyear.");
 			fm.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ConverterException(fm);
 		} catch (NullPointerException e) {

@@ -17,13 +17,12 @@
 		<h:outputLabel class="header">Date of Birth</h:outputLabel>
 		<h:inputText class="form-control form-control-sm" id="dob"
 			value="#{cc.attrs.value}" a:placeholder="Enter date of birth."
-			inputPattern="#{cc.attrs.inputPattern}" outputPattern="#{cc.attrs.outputPattern}"
-			converterMessage="Format required: year-month-day.">
+			inputPattern="#{cc.attrs.inputPattern}"
+			outputPattern="#{cc.attrs.outputPattern}">
 			<f:converter converterId="inputDateConverter" />
 			<f:validator validatorId="emptyDOBValidation" />
-			<f:validator validatorId="dobPatternValidation" />
 			<p:ajax event="blur" listener="#{employeeUIBean.updateEmployeeInfor}"
-				update="j_idt44:j_idt53:updateDOB" />
+				update="updateDOB" />
 		</h:inputText>
 		<h:messages class="error" for="dob" />
 	</h:panelGroup>
