@@ -1,0 +1,66 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: #f6f6f6;
+}
+
+.listE-hd, .ed-form, .ae-form {
+	margin-top: 5%;
+}
+
+.listE-hd, .table, .ed-form, .footer, .ae-form, .empty-le {
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.8);
+}
+
+.form-group {
+	margin-bottom: 1%;
+	overflow: hidden;
+}
+
+.ed-section {
+	width: 50%;
+	margin: auto;
+}
+
+.header {
+	font-weight: bold;
+}
+
+.ed-form, .ae-form {
+	padding: 1.5%;
+}
+
+.btn-group {
+	margin-top: 1.5%;
+	float: right;
+}
+
+.table {
+	margin-bottom: 0.5rem;
+}
+
+.footer {
+	padding: 5px;
+	overflow: hidden;
+}
+
+.ae-form {
+	overflow: hidden;
+}
+
+.btn-add {
+	float: right;
+}
+
+.error {
+	color: red;
+	list-style: none;
+	padding-left: 0px;
+	font-size: 12px;
+	margin-bottom: 0px;
+}
+
+.empty-le {
+	height: 100px;
+	padding-top: 2%;
+}

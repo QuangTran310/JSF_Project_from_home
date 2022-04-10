@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="value" />
+	<composite:attribute name="inputPattern" />
+	<composite:attribute name="outputPattern" />
+</composite:interface>
+
+<composite:implementation>
+	<h:panelGroup id="updateDOB">
+		<h:outputLabel class="header">Date of Birth</h:outputLabel>
+		<h:inputText class="form-control form-control-sm" id="dob"
+			value="#{cc.attrs.value}" a:placeholder="Enter date of birth."
+			inputPattern="#{cc.attrs.inputPattern}" outputPattern="#{cc.attrs.outputPattern}"
+			converterMessage="Format required: year-month-day.">
+			<f:converter converterId="inputDateConverter" />
+			<f:validator validatorId="emptyDOBValidation" />
+			<f:validator validatorId="dobPatternValidation" />
+			<p:ajax event="blur" listener="#{employeeUIBean.updateEmployeeInfor}"
+				update="j_idt44:j_idt53:updateDOB" />
+		</h:inputText>
+		<h:messages class="error" for="dob" />
+	</h:panelGroup>
+</composite:implementation>
+
+</html>
